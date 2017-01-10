@@ -1,0 +1,63 @@
+// to create user-defined exceptions
+class Invalid_idException extends Exception {             //user-defined exp-1
+	public Invalid_idException() {
+		super("Invalid_id of Student!!");
+	}
+
+	//public Invalid_idException(String msg) {
+		//super(msg);
+	//}
+}
+
+class InsufficientException extends Exception {                //user-defined exp-2
+	public InsufficientException() {
+		super("Insufficient place for new Student");
+	}
+
+	//public InsufficientException(String msg) {
+		//super(msg);
+	//}
+}
+
+class My_Student {                                              //a class
+	int id, num;
+
+	public My_Student(int id, int num) {                         // a constructor
+		this.id = id;
+		this.num = num;
+	}
+
+	public int check_stu(int id) throws Invalid_idException {        //method that throws exp-1 
+		if (id > 50)
+			throw new Invalid_idException();
+		return id;
+	}
+
+	public int add_stu(int num) throws InsufficientException {             //method that throws exp-2
+		if (num <= 50)
+			throw new InsufficientException();
+		return num;
+	}
+}
+
+public class Exception_demo3 {
+
+	public static void main(String[] args) {
+		My_Student my = new My_Student(0, 100);
+		try {
+			my.check_stu(50);
+			System.out.println("Student is valid!");
+			//my.check_stu(67);
+		} catch (Invalid_idException e) {
+			System.out.println(e);
+		}
+		try {
+			my.add_stu(50);
+			System.out.println("Class strength is full!!!Cannot be added");
+			//my.add_stu(2);
+		} catch (InsufficientException a) {
+			System.out.println(a);
+		}
+	}
+
+}
