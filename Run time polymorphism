@@ -1,0 +1,66 @@
+abstract class Stu{ //abstract
+	protected int id;
+	protected String name;
+	public Stu(int id,String name){
+		this.id=id;
+		this.name=name;
+	}
+	public void print(){
+		System.out.println("Id is:"+id);
+		System.out.println("Name is:"+name);
+	}
+	public abstract int getMarks(int marks);
+}
+class Cse extends Stu{
+	protected String branch;
+	protected int marks;
+	public Cse(int id,String name,String branch)
+	{
+		super(id,name);
+		this.branch=branch;
+	}
+	@Override
+	public  int getMarks(int marks)
+	{
+		this.marks=marks;
+		return marks;
+	}
+	@Override
+	public void print(){
+		super.print();
+		System.out.println("Belongs to:"+branch);
+		System.out.println("Score Obtained:"+marks);
+	}
+}
+class Ece extends Stu{
+	protected String branch;
+	protected int marks;
+	public Ece(int id,String name,String branch)
+	{
+		super(id,name);
+		this.branch=branch;
+	}
+	@Override
+	public int getMarks(int marks){
+		this.marks=marks;
+		return marks;
+	}
+	@Override
+	public void print(){
+		super.print();
+		System.out.println("Belongs to:"+branch);
+		System.out.println("Score Obtained:"+marks);
+	}
+}
+public class RunTime {
+
+	public static void main(String[] args) {
+	  Stu s= new Cse(535,"Faruk","cse"); //upcasting
+	  Stu c=new Ece(435,"Rohith","ece");
+	  s.getMarks(90);
+	  c.getMarks(100);
+	  s.print();
+	  c.print();
+	  }
+
+}
