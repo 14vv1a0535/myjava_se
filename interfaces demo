@@ -1,0 +1,37 @@
+interface Student{                        //declaring an interface
+	public int getId(int id);
+	public String getName(String name);       //methods in interface
+}
+interface Printable{
+	public void print();
+}
+class MyStudent implements Student,Printable{  //MyStudent class implements interface Student
+       private int id;
+       private String name;
+	 public int getId(int id)
+	 {
+		 this.id=id;
+		 return id;
+	 }
+	 public String getName(String name){
+		 this.name=name;
+		 return name;
+	 }
+	public  void  print(){
+		System.out.println("Id is:"+id);
+		System.out.println("Name is:"+name);
+	}
+}                                                     
+public class ineterface_demo {                      //main class
+
+	public static void main(String[] args) {
+	 MyStudent ms=new MyStudent();
+	//Printable ps=new MyStudent();
+	
+	 ms.getId(35);
+		ms.getName("faruk");
+		ms.print();     //if we use upcasting here then print() method cannot be used bcz it is not declared in Student cls
+
+	}
+
+}
