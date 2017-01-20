@@ -1,0 +1,77 @@
+//program on file viewer
+package swing_project;
+
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+public class FileViewer extends JFrame {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JTextArea ta;
+	JTextField tf;
+	JButton bu;
+
+	public FileViewer() throws Exception {
+		super("File Viewer 5.0");
+		ta = new JTextArea();
+		ta.setEditable(false);
+		tf = new JTextField(30);
+		tf.setEditable(true);
+		bu = new JButton("Browse");
+		JPanel pl = new JPanel();
+		pl.add(new JLabel("Enter Filename"));
+		pl.add(tf);
+		pl.add(bu);
+		Container c = getContentPane();
+		c.add(pl, BorderLayout.PAGE_START);
+		JScrollPane sp = new JScrollPane(ta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		c.add(sp);
+		bu.addActionListener(e -> { JFileChooser jf=new JFileChooser();
+		int re=jf.showOpenDialog(this);
+		if(re == JFileChooser.APPROVE_OPTION)
+		{
+			tf.setText(jf.getSelectedFile().getAbsolutePath());
+			try {
+				openFile();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		});
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public void openFile() throws Exception {
+		FileReader f = new FileReader(tf.getText());
+		BufferedReader bf = new BufferedReader(f);
+		ta.setText("");
+		String line = bf.readLine();
+		while (line != null) {
+			ta.append(line + "\n");
+			line = bf.readLine();
+		}
+		bf.close();
+	}
+
+	public static void main(String arg[]) throws Exception {
+		FileViewer f = new FileViewer();
+		f.setVisible(true);
+		f.setSize(600, 500);
+
+	}
+}
