@@ -1,0 +1,20 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class RetrieveDB {
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE"; //DataBase  URL to get connected to database
+	private static final String uname = "system";                            //DataBase Username
+	private static final String pwd = "oracle";                              //DataBase Password
+	public static void main(String[] args) throws Exception {
+		Class.forName("oracle.jdbc.driver.OracleDriver");                       //load the class into JVM
+		Connection con = DriverManager.getConnection(url, uname, pwd);          //Connects to the DataBase
+		Statement stmt = con.createStatement();                                 //Creates a  statement
+		String sql = "select * from (table name)";                                //sql command to retereive data from database 
+		ResultSet rs = stmt.executeQuery(sql);                                  // ResultSet object holds the data retrieved from database
+		while (rs.next())                                                      //next() method to get the records from table one by one
+			System.out.println(rs.getInt(1) + "--" +rs.getString(2) + "--" +rs.getString(3));
+	con.close();                                                               //connection gets closed
+	}
+}
