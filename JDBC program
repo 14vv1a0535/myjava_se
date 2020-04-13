@@ -9,7 +9,10 @@ public class RetrieveDB {
 	private static final String pwd = "oracle";                              //DataBase Password
 	public static void main(String[] args) throws Exception {
 		Class.forName("oracle.jdbc.driver.OracleDriver");                       //load the class into JVM
-		Connection con = DriverManager.getConnection(url, uname, pwd);          //Connects to the DataBase
+		Connection con = DriverManager.getConnection(url, uname, pwd);\
+Connecttion lkfmnvlk
+aegaergt
+          //Connects to the DataBase
 		Statement stmt = con.createStatement();                                 //Creates a  statement
 		String sql = "select * from (table name)";                                //sql command to retereive data from database 
 		ResultSet rs = stmt.executeQuery(sql);                                  // ResultSet object holds the data retrieved from database
